@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { uploadChapter, fetchChapters } from "../../utils/api";
 
 const ContentManagement = () => {
@@ -6,6 +6,18 @@ const ContentManagement = () => {
   const [chapters, setChapters] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadChapters = async () => {
+      try {
+        const { data } = await fetchChapters();
+        setChapters(data);
+      } catch (err) {
+        setError("Failed to fetch chapters");
+      }
+    };
+    loadChapters();
+  }, []);
 
   const handleFileChange = (e) => {
     setChapter({ ...chapter, pdf: e.target.files[0] });
@@ -55,6 +67,25 @@ const ContentManagement = () => {
           {loading ? "Uploading..." : "Upload Chapter"}
         </button>
       </form>
+
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-4">Chapters List</h3>
+        <ul className="space-y-2">
+          {chapters.map((chap) => (
+            <li key={chap._id} className="p-2 border rounded-lg">
+              <p>{chap.title}</p>
+              <a
+                href={`http://localhost:5000/${chap.pdf}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-blue-500 hover:underline"
+              >
+                View PDF
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

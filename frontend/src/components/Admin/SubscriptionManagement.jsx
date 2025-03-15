@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { addSubscriber, fetchSubscribers } from "../../utils/api";
 
 const SubscriptionManagement = () => {
@@ -6,6 +6,18 @@ const SubscriptionManagement = () => {
   const [subscribers, setSubscribers] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadSubscribers = async () => {
+      try {
+        const { data } = await fetchSubscribers();
+        setSubscribers(data);
+      } catch (err) {
+        setError("Failed to fetch subscribers");
+      }
+    };
+    loadSubscribers();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -56,6 +68,18 @@ const SubscriptionManagement = () => {
           {loading ? "Adding..." : "Add Subscriber"}
         </button>
       </form>
+
+      <div className="mt-6">
+        <h3 className="text-lg font-semibold mb-4">Subscribers List</h3>
+        <ul className="space-y-2">
+          {subscribers.map((subscriber) => (
+            <li key={subscriber.email} className="p-2 border rounded-lg">
+              <p>{subscriber.name}</p>
+              <p className="text-sm text-gray-600">{subscriber.email}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -4,6 +4,7 @@ const passport = require('passport');
 const connectDB = require('./utils/db');
 require('dotenv').config();
 require('./config/passportConfig');
+// require('./config/passport');
 
 const authRoutes = require('./routes/authRoutes');
 const adminRoutes = require('./routes/adminRoutes');

@@ -1,4 +1,3 @@
-// src/components/Admin/Dashboard.js
 import React from "react";
 import SubscriptionManagement from "./SubscriptionManagement";
 import ContentManagement from "./ContentManagement";

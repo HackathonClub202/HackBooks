@@ -1,6 +1,6 @@
-const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const User = require('../models/User');
+const passport = require('passport');
+const User = require('../models/User'); // Adjust the path for your user model
 
 passport.use(
   new GoogleStrategy(
@@ -10,18 +10,19 @@ passport.use(
       callbackURL: '/auth/google/callback',
     },
     async (accessToken, refreshToken, profile, done) => {
-      const email = profile.emails[0].value;
-
       try {
-        let user = await User.findOne({ email });
-
+        // Find or create user in your database
+        let user = await User.findOne({ googleId: profile.id });
         if (!user) {
-          return done(null, false, { message: 'User not subscribed' });
+          user = await User.create({
+            googleId: profile.id,
+            name: profile.displayName,
+            email: profile.emails[0].value,
+          });
         }
-
-        done(null, user);
-      } catch (err) {
-        done(err, false);
+        return done(null, user);
+      } catch (error) {
+        return done(error, null);
       }
     }
   )
@@ -35,7 +36,7 @@ passport.deserializeUser(async (id, done) => {
   try {
     const user = await User.findById(id);
     done(null, user);
-  } catch (err) {
-    done(err, false);
+  } catch (error) {
+    done(error, null);
   }
 });

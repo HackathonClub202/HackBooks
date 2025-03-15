@@ -4,6 +4,8 @@ const Chapter = require("../models/Chapter");
 const adminAuth = require("../middleware/auth");
 const multer = require("multer");
 const router = express.Router();
+const passport = require("passport");
+const { getChapters } = require('../controllers/contentController');
 
 // Upload a chapter PDF
 router.post("/upload", adminAuth, (req, res) => {
@@ -40,5 +42,13 @@ router.post("/:id/questions", adminAuth, async (req, res) => {
     res.status(500).json({ message: "Error adding questions", error: error.message });
   }
 });
+
+
+// routes/content.js
+
+router.get('/chapters', adminAuth, getChapters);
+// routes/content.js
+router.get('/chapter/:chapterId/test', adminAuth  , getTest);
+
 
 module.exports = router;
