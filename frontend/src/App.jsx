@@ -1,25 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
-import AdminDashboard from './components/AdminDashboard';
-import UserDashboard from './components/User/UserDashboard';
-import ChapterViewer from './components/User/ChapterViewer';
-import ChapterTest from './components/User/ChapterTest';
-import './App.css';
-import UserLogin from './components/User/Login';
+import { Routes, Route } from 'react-router-dom';
+import AdminLogin from './components/AdminLogin';
+import GoogleLoginButton from './components/GoogleLoginButton';
+import ProtectedRoute from './components/ProtectedRoute';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
-    <Router>
+    <div>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/login" element={<UserLogin/>} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/chapter/:chapterId" element={<ChapterViewer />} />
-        <Route path="/chapter/:chapterId/test" element={<ChapterTest />} />
+        <Route path="/login" element={<AdminLogin />} />
+        <Route path="/google-login" element={<GoogleLoginButton />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
-    </Router>
+    </div>
   );
 }
 
