@@ -1,0 +1,133 @@
+/* Admin Login Page Styles */
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+  }
+  
+  .login-card {
+    width: 100%;
+    max-width: 450px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .login-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .login-header h2 {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .login-header p {
+    color: #7f8c8d;
+    font-size: 16px;
+  }
+  
+  .tab-switcher {
+    display: flex;
+    margin-bottom: 25px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #7f8c8d;
+  }
+  
+  .tab-btn.active {
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #34495e;
+  }
+  
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #dcdfe6;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    background-color: #f8fafc;
+  }
+  
+  input:focus {
+    outline: none;
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    background-color: #ffffff;
+  }
+  
+  .submit-btn {
+    width: 100%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+  }
+  
+  .submit-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+  }
+  
+  .submit-btn:active {
+    transform: translateY(0);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 500px) {
+    .login-card {
+      padding: 20px;
+    }
+    
+    .login-header h2 {
+      font-size: 24px;
+    }
+    
+    .tab-btn, input, .submit-btn {
+      padding: 12px;
+      font-size: 15px;
+    }
+  }

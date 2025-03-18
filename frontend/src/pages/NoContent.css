@@ -1,0 +1,121 @@
+.no-content-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: #f8f9fa;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #333;
+  }
+  
+  .content-box {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 3rem;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .divider {
+    height: 4px;
+    width: 60px;
+    background: linear-gradient(90deg, #4776E6, #8E54E9);
+    margin: 1.5rem auto;
+    border-radius: 2px;
+  }
+  
+  .message {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #555;
+  }
+  
+  .club-info {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .club-info h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+  
+  .club-info p {
+    color: #666;
+    line-height: 1.6;
+  }
+  
+  .cta-section {
+    margin-top: 2rem;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .social-btn {
+    padding: 0.5rem 1rem;
+    background-color: #f0f0f0;
+    color: #333;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .social-btn:hover {
+    background-color: #4776E6;
+    color: white;
+    transform: translateY(-2px);
+  }
+  
+  footer {
+    margin-top: 3rem;
+    color: #999;
+    font-size: 0.9rem;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .content-box {
+      padding: 2rem;
+    }
+    
+    .title {
+      font-size: 2.5rem;
+    }
+    
+    .social-links {
+      flex-direction: column;
+      align-items: center;
+    }
+  }

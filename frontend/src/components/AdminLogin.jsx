@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './AdminLogin.css'; // We'll create this CSS file
 
 const AdminLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -27,27 +29,68 @@ const AdminLogin = () => {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isLogin) {
+      handleLogin(e);
+    } else {
+      handleRegister(e);
+    }
+  };
+
   return (
-    <div>
-      <h2>Admin Login / Register</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Admin Email"
-          required
-        />
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-          required
-        />
-        <button type="submit">Login</button>
-        <button onClick={handleRegister}>Register</button>
-      </form>
+    <div className="admin-login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h2>{isLogin ? 'Admin Login' : 'Admin Registration'}</h2>
+          <p>Enter your credentials to access the admin panel</p>
+        </div>
+        
+        <div className="tab-switcher">
+          <button 
+            className={`tab-btn ${isLogin ? 'active' : ''}`} 
+            onClick={() => setIsLogin(true)}
+          >
+            Login
+          </button>
+          <button 
+            className={`tab-btn ${!isLogin ? 'active' : ''}`} 
+            onClick={() => setIsLogin(false)}
+          >
+            Register
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              required
+            />
+          </div>
+          
+          <div className="input-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
+          </div>
+          
+          <button type="submit" className="submit-btn">
+            {isLogin ? 'Login' : 'Register'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
