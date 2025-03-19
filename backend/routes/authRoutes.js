@@ -40,7 +40,7 @@ passport.deserializeUser((obj, done) => {
 router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 
 // Google OAuth callback endpoint
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/login' }),
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: '/google-login' }),
   (req, res) => {
     console.log(`Redirect URI: ${req.originalUrl}`);
     const email = req.user.email;
