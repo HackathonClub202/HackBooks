@@ -13,9 +13,13 @@ router.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 // Get all books (protected)
 router.get('/', authMiddleware, async (req, res) => {
+  // console.log(req);
   try {
     const books = await Book.find();
+    const getBaseUrl = (req) => `${req.protocol}://${req.get('host')}`;
     const baseUrl = getBaseUrl(req);
+
+    console.log(baseUrl);
 
     // Add base URL to each chapter's `pdfUrl`
     const booksWithUrls = books.map((book) => ({
@@ -23,6 +27,8 @@ router.get('/', authMiddleware, async (req, res) => {
       chapters: book.chapters.map((chapter) => ({
         ...chapter,
         pdfUrl: `${baseUrl}/${chapter.pdfUrl.replace(/\\/g, '/')}`,
+        // pdfUrl: `${baseUrl}/${chapter.pdfUrl.replace(/\\/g, '/')}`
+
       })),
     }));
 
@@ -35,6 +41,8 @@ router.get('/', authMiddleware, async (req, res) => {
 
 // Get a specific book with chapters (protected)
 router.get('/:bookId', authMiddleware, async (req, res) => {
+  console.log(req.params.bookId);
+  console.log(req);
   try {
     const book = await Book.findById(req.params.bookId);
     if (!book) {
